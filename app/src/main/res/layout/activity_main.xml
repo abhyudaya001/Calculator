@@ -11,13 +11,13 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="406dp"
+        android:layout_height="376dp"
         android:layout_margin="10dp"
         android:text="TextView" />
 
     <GridLayout
         android:layout_width="346dp"
-        android:layout_height="238dp"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
         android:columnCount="4"
         android:orientation="horizontal">
@@ -58,8 +58,7 @@
 
         <Button android:text="C" />
 
-        <Button
-            android:text="X"/>
+        <Button android:text="X" />
 
         <Button
             android:layout_columnSpan="2"
