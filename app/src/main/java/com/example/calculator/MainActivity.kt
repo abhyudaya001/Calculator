@@ -1,4 +1,4 @@
-package com.example.calculator
+package com. example.calculator
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import java.lang.ArithmeticException
 
 class MainActivity : AppCompatActivity() {
     private var tvInput:TextView?=null
@@ -64,18 +65,53 @@ class MainActivity : AppCompatActivity() {
         lastOp=false
     }
     fun onOp(view: View){
-        if(lastNum && !lastOp)tvInput?.append((view as Button).text)
-        lastOp=true
-        lastNum=false
-        lastDec=false
+        tvInput?.text.let {
+            if(!lastOp && !isOperator(it.toString()))tvInput?.append((view as Button).text)
+            lastOp=true
+            lastNum=false
+            lastDec=false
+        }
+    }
+    fun isOperator(it: String):Boolean{
+        return if(it.startsWith("-")) false;
+        else{
+            it.contains("+")||it.contains("-")||it.contains("*")||it.contains("/")
+        }
     }
     fun onCal(view: View){
-        var ans="";
-        var s=tvInput?.text;
-        var t=s?.length;
-        tvInput?.setText("Server Down")
-//        while(t!=0){
-//
-//        }
+        var s=tvInput?.text.toString()
+        var a:Double
+        var b:Double
+        try {
+            if(lastNum){
+                if(s.contains("-")) {
+                    val sv = s.split("-")
+                    a = sv[0].toDouble()
+                    b = sv[1].toDouble()
+                    var ans = a - b
+                    tvInput?.text = ans.toString()
+                }else if(s.contains("+")){
+                    val sv = s.split("+")
+                    a = sv[0].toDouble()
+                    b = sv[1].toDouble()
+                    var ans = a + b
+                    tvInput?.text = ans.toString()
+                }else if(s.contains("*")){
+                    val sv = s.split("*")
+                    a = sv[0].toDouble()
+                    b = sv[1].toDouble()
+                    var ans = a * b
+                    tvInput?.text = ans.toString()
+                }else if(s.contains("/")){
+                    val sv = s.split("/")
+                    a = sv[0].toDouble()
+                    b = sv[1].toDouble()
+                    var ans = a / b
+                    tvInput?.text = ans.toString()
+                }
+            }
+        }catch (e:ArithmeticException){
+            e.printStackTrace()
+        }
     }
 }
