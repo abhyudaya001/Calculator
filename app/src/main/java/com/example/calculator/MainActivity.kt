@@ -82,33 +82,48 @@ class MainActivity : AppCompatActivity() {
         var s=tvInput?.text.toString()
         var a:Double
         var b:Double
+        var minus:Boolean=false;
+        if(s[0]=='-') {
+            s = s.substring(1)
+            minus=true
+        }
+        var ans:Double=0.0
         try {
             if(lastNum){
                 if(s.contains("-")) {
                     val sv = s.split("-")
                     a = sv[0].toDouble()
                     b = sv[1].toDouble()
-                    var ans = a - b
-                    tvInput?.text = ans.toString()
+                    if(minus){
+                        ans=0-(a+b)
+                    }
+                    else ans = a - b
                 }else if(s.contains("+")){
                     val sv = s.split("+")
                     a = sv[0].toDouble()
                     b = sv[1].toDouble()
-                    var ans = a + b
-                    tvInput?.text = ans.toString()
+                    if(minus){
+                        ans=b-a
+                    }
+                    else ans = a + b
                 }else if(s.contains("*")){
                     val sv = s.split("*")
                     a = sv[0].toDouble()
                     b = sv[1].toDouble()
-                    var ans = a * b
-                    tvInput?.text = ans.toString()
+                    if(minus){
+                        ans=-1*a*b
+                    }
+                    else ans = a * b
                 }else if(s.contains("/")){
                     val sv = s.split("/")
                     a = sv[0].toDouble()
                     b = sv[1].toDouble()
-                    var ans = a / b
-                    tvInput?.text = ans.toString()
+                    if(minus){
+                        ans=-1*(a/b)
+                    }
+                    else ans = a / b
                 }
+                tvInput?.text =ans.toString()
             }
         }catch (e:ArithmeticException){
             e.printStackTrace()

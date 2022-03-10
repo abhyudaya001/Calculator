@@ -15,7 +15,6 @@
         android:layout_height="375dp"
         android:layout_margin="10dp"
         android:gravity="right|bottom"
-        android:text="123456789"
         android:textSize="50dp" />
 
     <GridLayout
